@@ -1,0 +1,25 @@
+<h1>Salut c'est la show</h1>
+
+<%= @list.name %>
+
+
+<ul>
+  <% @list.bookmarks.each do |bookmark| %>
+    <li>
+      <%= bookmark.comment %>
+      <%= link_to bookmark_path(bookmark), data: {turbo_method: :delete, turbo_confirm: "t sur"} do  %>
+        <i class="fa-solid fa-trash"></i>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
+
+<%= simple_form_for [@list, @bookmark] do |f| %>
+  <%= f.input :comment %>
+  <%= f.association :movie %>
+  <%= f.button :submit %>
+<% end %>
+
+
+
+<%= link_to "Back to your lists", lists_path %>
